@@ -1,9 +1,21 @@
 import React from "react";
-import styled from 'styled-components';
+import {Wrapper,Nav,MainContainer,FooterContainer} from './AppStyle.js';
+import AvtarViewer from './components/AvtarViewer';
+import Footer from './components/Footer';
 
 function App(){
     return(
-        <img src='/alpaca-generator/public/Media/accessories/earings.png'/>
+        <Wrapper>
+            <Nav>
+                ALPACA GENERATOR
+            </Nav>
+            <MainContainer>
+                <AvtarViewer>
+
+                </AvtarViewer>
+            </MainContainer>
+            <FooterContainer><Footer></Footer></FooterContainer>
+        </Wrapper>
     );
 
 
