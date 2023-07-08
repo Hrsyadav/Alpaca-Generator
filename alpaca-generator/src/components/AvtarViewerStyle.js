@@ -9,8 +9,8 @@ export const LeftContainer=styled.div`
 `;
 
 export const Img=styled.img`
-    width:500px;
-    height:500px;
+    width:60%;
+    height:auto;
     position:absolute;
 `;
 
