@@ -9,8 +9,8 @@ export const LeftContainer=styled.div`
 `;
 
 export const Img=styled.img`
-    width:60%;
-    height:auto;
+    width:500px;
+    height:500px;
     position:absolute;
 `;
 
@@ -31,13 +31,15 @@ export const Button=styled.button`
         background:#0077be;
         color:#fff;
     }
-    min-height:3.5em;
+    font-weight:800;
     min-width:6em;    
     padding:0.6em 1em;
     border-radius:2em;
     background:#fff;
     border:1px solid skyblue;
     color:skyblue;
-    margin-inline:1em;
-    margin-block:0.5em;
+    margin-inline:0.4em;
+    margin-block:0.4em;
+    ${props=>(props.active)?'background:#0077be;color:#fff;':''}
+    min-height:3.5em;
 `;

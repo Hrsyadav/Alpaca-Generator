@@ -1,24 +1,33 @@
-import React from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import {LeftContainer,Img,RightContainer} from './AvtarViewerStyle.js';
-import {bodyParts} from './AlpacaConstants';
+import {bodyParts,reducer,initialBody} from './AlpacaConstants';
 import Accessories from './Accessories';
 import AccessoriesOptions from  './AccessoriesOptions';
 
-function AvtarViewer(){
+function AvtarViewer({randomParts}){
+    const [body,dispatch]=useReducer(reducer,initialBody);
+    const [currentPart,setCurrentPart]=useState('backgrounds');
+    const bodyPartChange=(part)=>{
+        setCurrentPart(part);
+    };
+    const optionChangeHandler=(currentPart,option)=>{
+        dispatch({type:'Update',data:{[currentPart]:option}});
+    };
+    useEffect(()=>{
+        dispatch({type:'Update',data:randomParts});
+    },[randomParts]);
     return(
         <>
-        <LeftContainer>
-            <Img src="./Media/backgrounds/blue50.png" ></Img>
-            {console.log(Object.entries(bodyParts))}
-            {Object.entries(bodyParts).map((part,index) => {
-                return <Img src={"./Media/"+part[0]+"/default.png"} key={index} ></Img>
+        <LeftContainer id="alpaca">
+            {Object.entries(body).map((part,index) => {
+                const first=part[0]==='nose'?'':part[0];
+                const second=part[0]==='nose'?'nose':bodyParts[part[0]][part[1]];
+                return <Img src={"./Media/"+first+"/"+second+".png"} key={index} ></Img>
             })}
-            <Img src="./Media/accessories/headphone.png" ></Img>
-            <Img src="./Media/nose.png" ></Img>
         </LeftContainer>
         <RightContainer>
-            <Accessories></Accessories>
-            <AccessoriesOptions></AccessoriesOptions>
+            <Accessories onBodyPartChange={bodyPartChange}></Accessories>
+            <AccessoriesOptions currentPart={currentPart} onOptionChange={optionChangeHandler}></AccessoriesOptions>
         </RightContainer>
         </>
     );
